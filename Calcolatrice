@@ -1,0 +1,84 @@
+#! /usr/bin/python
+ 
+import time
+import random
+Continuo = 1
+NR=0
+while Continuo == 1:
+        Inizio=input("\n\rBenvenuto\n\r1=Calcolatrice \n\r2=Data e ora \n\r3=Numero a caso\n\r4=Teorema di Pitagora\n\r5=Traduttore in codice binario\n\r6=Testa o Croce\n\r")
+ 
+ 
+        #Calcolatrice
+        Risultato=0.0
+        if Inizio==1:
+                while True:
+                        Risultato=0.0
+                        Continuo=0
+                        Operazione=input("Quale operazione vuoi usare?? \n\r 1=Addizione \n\r 2=Sottrazione \n\r 3=Moltiplicazione \n\r 4=Divisione \n\r 5=Potenza \n\r 6=Radice \n\r")
+                        aN=input("Qual'e' l'addendo/minuendo/moltiplicando/dividendo/base?? \n\r")
+                        bN=input("E il secondo addendo/sottraendo/moltiplicatore/divisore/\n\responente/segno di radice?? \n\r")
+                        if(Operazione==1):
+                                Risultato=aN+bN
+                                print(" %r + \n\r %r = \n\r----------- \n\r %r \n\rCalcolatrice By JackSpera\n\r\n\r\n\r"%(aN,bN,Risultato))
+                        elif(Operazione==2):
+                                Risultato=aN-bN
+                                print(" %r - \n\r %r = \n\r----------- \n\r %r \n\rCalcolatrice By JackSpera\n\r\n\r\n\r"%(aN,bN,Risultato))
+                        elif(Operazione==3):
+                                Risultato=aN*bN
+                                print(" %r * \n\r %r = \n\r----------- \n\r %r \n\rCalcolatrice By JackSpera\n\r\n\r\n\r"%(aN,bN,Risultato))
+                        elif(Operazione==4):
+                                Risultato=aN/bN
+                                print(" %r / \n\r %r = \n\r----------- \n\r %r \n\rCalcolatrice By JackSpera\n\r\n\r\n\r"%(aN,bN,Risultato))
+                        elif(Operazione==5):
+                                Risultato=aN**bN
+                                print(" %r ^ \n\r %r = \n\r----------- \n\r %r \n\rCalcolatrice By JackSpera\n\r\n\r\n\r"%(aN,bN,Risultato))
+                        elif(Operazione==6):
+                                Risultato=aN**(1.0/bN)
+                                print(" %r Radice \n\r %r = \n\r----------- \n\r %r \n\rCalcolatrice By JackSpera\n\r\n\r\n\r"%(aN,bN,Risultato))
+                        else:          
+                                print("Inserisci un operazione valida")
+        #Data
+        if Inizio==2:
+                print (time.strftime("Data:%A(%d)/%B(%m)/%Y \n\rOre:%r"))
+                Continuo=1
+        #Numero casuale
+        if Inizio==3:
+                    Nm=input("Inserisci il numero minimo incluso\n\r")
+                    NM=input("Inserisci il numero massimo incluso\n\r")
+                    NR=random.randint(Nm,NM)
+                    print("########### \n\r# %d \n\r###########"%(NR))
+                    NR=0
+                    Continuo=1
+        #Teorema di Pitagora
+        if Inizio==4:
+                RPit=0
+                OpPit=input("Vuoi calcolare\n\r1=Ipotenusa\n\r2=Cateto\n\r")
+                C1=input("Inserisci un Cateto o l'iptenusa\n\r")
+                C2=input("Inserisci il Cateto\n\r")
+                if OpPit==1:
+                    RPit=(((C1**2)+(C2**2))**(1.0/2))
+                    print("###########\n\r  %r"%(RPit))
+                    RPit=0
+                if OpPit==2:
+                    RPit=(((C1**2)-(C2**2))**(1.0/2))
+                    print("###########\n\r  %r"%(RPit))
+                    RPit=0
+        if  Inizio==5:
+            NBi=input("Inserisci il numero in base 10:")
+            while NBi>0:
+                if NBi%2==0:
+                    print 0,
+                else:
+                    print 1,
+ 
+                NBi=NBi/2
+          #Testa o Croce
+        if Inizio==6:
+           ToC=0
+           ToC=random.randint(1,2)
+           if ToC==1:
+               ToC="Testa"
+           elif ToC==2:
+               ToC="Croce"
+           print"-----------\n\r %r"%ToC
+           ToC=0
