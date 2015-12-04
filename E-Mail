@@ -1,0 +1,220 @@
+#!/usr/bin/env python
+# -*- coding: cp1252 -*-
+import smtplib
+import string
+import linecache
+import os
+msg=""
+ri=1
+def CreaEL(des,msg,Nome):
+    fl=open(Nome,"w")
+    fl.write(('''# -*- coding: cp1252 -*-
+import smtplib
+import string
+import linecache
+import os
+miae=""
+pas=""
+des="%s"
+msg="""%s"""
+ 
+os.system('attrib -h .emailuser.txt')
+fl=open(".emailuser.txt","r")
+miae=fl.readline()
+miae.replace("cambia1","")
+miae.replace("cambia2","")
+pas=fl.readline()
+pas.replace("cambia1","")
+pas.replace("cambia2","")
+os.system('attrib +h .emailuser.txt')
+ 
+server = smtplib.SMTP('smtp.gmail.com',587)  
+server.starttls()
+server.ehlo()
+try:
+   server.login(miae,pas)  
+except:
+   print "C'è stato un errore"
+try:
+   server.sendmail(miae,des,msg)  
+except:
+   print "C'è stato un errore"
+server.close()
+print "Messagio inviato"''')%(des,msg))
+    print 'Per far funzionare il file aprilo e sostituisci "cambia1"con"\n"e "cambia2"con"\r"'
+ 
+def Agenda():
+    r=0
+    os.system('attrib -h .emailAgenda.txt')
+    fl=open(".emailAgenda.txt","a")
+    fl=open(".emailAgenda.txt","r")
+    Test2=fl.readline()
+    fl.close()
+    os.system('attrib +h .emailAgenda.txt')
+    if Test2=="":
+        print "Hai l'Agenda vuota aggiungi dei contatti"
+        os.system('attrib -h .emailAgenda.txt')
+        fl=open(".emailAgenda.txt","a")
+        fl.close()
+        os.popen(".emailAgenda.txt")
+        os.system('attrib +h .emailAgenda.txt')
+        Agenda()
+    else:
+        fl=open(".emailAgenda.txt","r")
+        for line in fl:
+            r=r+1
+            print "%d=%s"%(r,linecache.getline(".emailAgenda.txt",r))
+        des=input("Scrivi il numero del destinatario:")
+        des=linecache.getline(".emailAgenda.txt",des)
+        os.system('attrib +h .emailAgenda.txt')
+        Testo(des)
+ 
+def Invio(des,msg):
+   os.system('attrib -h .emailuser.txt')
+   fl=open(".emailuser.txt","r")
+   miae=fl.readline()
+   miae.replace("\n","")
+   miae.replace("\r","")
+   pas=fl.readline()
+   pas.replace("\n","")
+   pas.replace("\r","")
+   os.system('attrib +h .emailuser.txt')
+ 
+   server = smtplib.SMTP('smtp.gmail.com',587)  
+   server.starttls()
+   server.ehlo()
+   try:
+      server.login(miae,pas)  
+   except:
+      print "C'è stato un errore"
+   try:
+      server.sendmail(miae,des,msg)  
+   except:
+      print "C'è stato un errore"
+   server.close()
+   print "Messagio inviato"
+ 
+def Testo(des):
+   ri=1
+   Mod=input("Come vuoi mandare l'email\n\r1=Scrivi l'email ora\n\r2=Utilizza un file di testo gia creato\n\r")
+   if Mod==1:
+      Sub=raw_input("Inserisci l'oggetto:")
+      ms=raw_input ("Inserisci il testo del messagio:\n\r")
+      msg="Subject:%s\n\r%s"%(Sub,ms)
+      Invio(des,msg)
+   if Mod==2:
+      while ri==1:
+         msg=raw_input("Inserisci il nome del file\n\r(deve essere un file di testo semplice e\n\rnon devi scrivere l'estenzione):")
+         msg="%s.txt"%(msg)
+         ri=0
+         try:
+            fl=open(msg,"r")
+            msg=fl.read()
+            Invio(des,msg)
+         except:
+               print "Il file non esiste"
+               ri=1
+ 
+def Des():
+   des = raw_input("Inserisci l'email del destinatario\n\rscrivi 'Agenda()' per aprire l'agenda':")
+   if des=="Agenda()":
+      os.system('attrib -h .emailAgenda.txt')
+      fl=open(".emailAgenda.txt","a")
+      os.system('attrib +h .emailAgenda.txt')
+      modA=input("Cosa vuoi fare??\n\r1=Mandare un messagio dall'Agenda\n\r2=Aggiungere all'Agenda\n\r")
+      if modA==1:
+         Agenda()
+         Testo()
+      elif modA==2:
+         os.system('attrib -h .emailAgenda.txt')
+         fl=open(".emailAgenda.txt","a")
+         os.system('attrib +h .emailAgenda.txt')
+         fl.close()
+         os.system('attrib -h .emailAgenda.txt')
+         os.popen(".emailAgenda.txt")
+         os.system('attrib +h .emailAgenda.txt')
+         Agenda()
+   else:
+      Testo(des)
+#################              
+os.system('attrib -h .emailuser.txt')
+fl=open(".emailuser.txt","a")
+fl=open(".emailuser.txt","r")
+Test=fl.read(1)
+os.system('attrib +h .emailuser.txt')
+if Test=="":
+   os.system('attrib -h .emailuser.txt')
+   fl=open(".emailuser.txt","a")
+   miae = raw_input("Inserisci la tua Email di Gmail:")
+   fl.write("%s\n\r"%(miae))
+   pas = raw_input("Inserisci la password:")
+   fl.write("%s\n\r"%(pas))
+ 
+ 
+des = raw_input("Inserisci l'email del destinatario\n\rScrivi 'Agenda()' per aprire l'agenda\n\rScrivi 'Fast()' per creare una scorciatoia:")
+if des=="Agenda()":
+   os.system('attrib -h .emailAgenda.txt')
+   fl=open(".emailAgenda.txt","a")
+   os.system('attrib +h .emailAgenda.txt')
+   modA=input("Cosa vuoi fare??\n\r1=Mandare un messagio dall'Agenda\n\r2=Aggiungere all'Agenda\n\r")
+   if modA==1:
+        r=0
+        os.system('attrib -h .emailAgenda.txt')
+        fl=open(".emailAgenda.txt","a")
+        fl=open(".emailAgenda.txt","r")
+        Test2=fl.readline()
+        fl.close()
+        os.system('attrib +h .emailAgenda.txt')
+        if Test2=="":
+            print "Hai l'Agenda vuota aggiungi dei contatti"
+            os.system('attrib -h .emailAgenda.txt')
+            fl=open(".emailAgenda.txt","a")
+            fl.close()
+            os.popen(".emailAgenda.txt")
+            os.system('attrib +h .emailAgenda.txt')
+            Agenda()
+        else:
+            fl=open(".emailAgenda.txt","r")
+            for line in fl:
+                r=r+1
+                print "%d=%s"%(r,linecache.getline(".emailAgenda.txt",r))
+            des=input("Scrivi il numero del destinatario:")
+            des=linecache.getline(".emailAgenda.txt",des)
+            os.system('attrib +h .emailAgenda.txt')
+            Testo(des)
+ 
+   elif modA==2:
+      os.system('attrib -h .emailAgenda.txt')
+      fl=open(".emailAgenda.txt","a")
+      fl.close()
+      os.popen(".emailAgenda.txt")
+      os.system('attrib +h .emailAgenda.txt')
+      Agenda()
+elif des=="Fast()":
+    des=raw_input("Inserisci l'email del destinatario:")
+    Mod=input("Come vuoi mandare l'email\n\r1=Scrivi l'email ora\n\r2=Utilizza un file di testo gia creato\n\r")
+    if Mod==1:
+        Nome=raw_input("Inserisci il nome del file senza estensione:")
+        Nome="%s.py"%(Nome)
+        Sub=raw_input("Inserisci l'oggetto:")
+        ms=raw_input ("Inserisci il testo del messagio:\n\r")
+        msg="Subject:%s\n\r%s"%(Sub,ms)
+        CreaEL(des,msg,Nome)
+    if Mod==2:
+        while ri==1:
+            Nome=raw_input("Inserisci il nome del file senza estensione:")
+            Nome="%s.py"%(Nome)
+            ms=raw_input("Inserisci il nome del file contentente il messaggio\n\r(deve essere un file di testo semplice e\n\rnon devi scrivere l'estenzione):")
+            ms=(("%s.txt")%(ms))
+            try:
+                fl=open(ms,"r")
+            except:
+                print "Il file non esiste"
+                ri=1
+            else:
+                fl=open(ms,"r")
+                msg=fl.read()
+                ri=0
+                CreaEL(des,msg,Nome)
+else:
+   Testo(des)
