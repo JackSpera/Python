@@ -1,0 +1,43 @@
+import linecache
+import os
+import string
+r=0
+mod=input("Cosa vuoi fare??\n\r1=Fare la lista\n\r2=Aggiungere ogetti alla lista\n\r")
+if mod==1:
+    os.system('attrib -h .IngSpesa.txt')
+    fl=open(".IngSpesa.txt","a")
+    fl=open(".IngSpesa.txt","r")
+    while fl.read()=="":
+        print "Hai la lista degli ingredienti vuota scrivi il loro nome"
+        os.popen(".IngSpesa.txt")
+        if fl.read(1)!="":
+            break
+    fl=open("Lista Della Spesa.txt","w")
+    fl.write("Lista della spesa\n\r")
+    fl=open(".IngSpesa.txt","r")
+    for line in fl:
+        r=r+1
+        Ing=linecache.getline(".IngSpesa.txt",r)
+        print Ing
+        Qua=input("Quanto ne vuoi??:")
+        if Qua!=0:
+            Un=raw_input("Come si misura??\n\rgr=Grammi\n\rl=Litri\n\ret=Etti\n\rkl=Chili\n\r")
+            if Un=="gr":
+                Un="Grammi"
+            elif Un=="l":
+                Un="Litri"
+            elif Un=="et":
+                Un="Etti"
+            elif Un=="kl":
+                Un="Chili"
+            Ing.replace("\n","")
+            Ing.replace("\r","")
+            Un.replace("\n","")
+            Un.replace("\r","")
+            fl=open("Lista Della Spesa.txt","a")
+            fl.write(("%s%d %s\n\r")%(Ing,Qua,Un))
+            os.system('attrib +h .IngSpesa.txt')
+elif mod==2:
+    os.system('attrib -h .IngSpesa.txt')
+    os.popen(".IngSpesa.txt")
+    os.system('attrib +h .IngSpesa.txt')
