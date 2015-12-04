@@ -1,0 +1,76 @@
+# -*- coding: cp1252 -*-
+import random
+tab=["-","-","-","-","-","-","-","-","-"]
+def MioT():
+    while True:
+        p=input("Dove vuoi mettere il tuo segno??\n\r1-2-3\n\r4-5-6\n\r7-8-9\n\r")
+        if tab[p-1]=="-":
+            tab[p-1]="X"
+            print "###########\n\r"+tab[0]+tab[1]+tab[2]+"\n\r"+tab[3]+tab[4]+tab[5]+"\n\r"+tab[6]+tab[7]+tab[8]
+            Con()
+            TuoT()
+        else:
+            print "La casella è gia occupata"
+def TuoT():
+    while True:
+        p=random.randint(1,9)
+        if tab[p-1]=="-":
+            tab[p-1]="O"
+            print "###########\n\r"+tab[0]+tab[1]+tab[2]+"\n\r"+tab[3]+tab[4]+tab[5]+"\n\r"+tab[6]+tab[7]+tab[8]
+            Con()
+            MioT()
+def Con():
+    if tab[0]=="X" and tab[1]=="X" and tab[2]=="X":
+        raw_input("Ha vinto il Giocatore")
+        quit()
+    elif tab[3]=="X" and tab[4]=="X" and tab[5]=="X":
+        raw_input("Ha vinto il Giocatore")
+        quit()
+    elif tab[6]=="X" and tab[7]=="X" and tab[8]=="X":
+        raw_input("Ha vinto il Giocatore")
+        quit()
+    elif tab[0]=="X" and tab[4]=="X" and tab[8]=="X":
+        raw_input("Ha vinto il Giocatore")
+        quit()
+    elif tab[2]=="X" and tab[4]=="X" and tab[6]=="X":
+        raw_input("Ha vinto il Giocatore")
+        quit()
+    elif tab[1]=="X" and tab[4]=="X" and tab[7]=="X":
+        raw_input("Ha vinto il Giocatore")
+        quit()
+    elif tab[0]=="X" and tab[3]=="X" and tab[6]=="X":
+        raw_input("Ha vinto il Giocatore")
+        quit()
+    elif tab[2]=="X" and tab[5]=="X" and tab[8]=="X":
+        raw_input("Ha vinto il Giocatore")
+        quit()
+    elif tab[0]=="O" and tab[1]=="O" and tab[2]=="O":
+        raw_input("Ha vinto il Computer")
+        quit()
+    elif tab[3]=="O" and tab[4]=="O" and tab[5]=="O":
+        raw_input("Ha vinto il Computer")
+        quit()
+    elif tab[6]=="O" and tab[7]=="O" and tab[8]=="O":
+        raw_input("Ha vinto il Computer")
+        quit()
+    elif tab[0]=="O" and tab[4]=="O" and tab[8]=="O":
+        raw_input("Ha vinto il Computer")
+        quit()
+    elif tab[2]=="O" and tab[4]=="O" and tab[6]=="O":
+        raw_input("Ha vinto il Computer")
+        quit()
+    elif tab[1]=="O" and tab[4]=="O" and tab[7]=="O":
+        raw_input("Ha vinto il Computer")
+        quit()
+    elif tab[0]=="O" and tab[3]=="O" and tab[6]=="O":
+        raw_input("Ha vinto il Computer")
+        quit()
+    elif tab[2]=="O" and tab[5]=="O" and tab[8]=="O":
+        raw_input("Ha vinto il Computer")
+        quit()
+print "###########\n\r"+tab[0]+tab[1]+tab[2]+"\n\r"+tab[3]+tab[4]+tab[5]+"\n\r"+tab[6]+tab[7]+tab[8]
+t=random.randint(1,2)
+if t==1:
+    MioT()
+elif t==2:
+    TuoT()
